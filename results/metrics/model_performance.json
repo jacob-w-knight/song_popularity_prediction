@@ -1,0 +1,17 @@
+{
+  "neural_network": {
+    "accuracy": 0.359445178335535,
+    "model_name": "Neural Network",
+    "top_3_accuracy": 0.5966534566270365,
+    "top_5_accuracy": 0.7112725671510348,
+    "top_10_accuracy": 0.8562307353588727
+  },
+  "xgboost": {
+    "accuracy": 0.45715543813298104,
+    "model_name": "XGBoost",
+    "top_3_accuracy": 0.713518273888155,
+    "top_5_accuracy": 0.8088507265521797,
+    "top_10_accuracy": 0.9120211360634082
+  },
+  "best_model": "xgboost"
+}

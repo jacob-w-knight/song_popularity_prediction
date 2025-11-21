@@ -96,23 +96,3 @@ class SpotifyPreprocessor:
         )
 
         return df_scaled
-
-    def encode_target(self, y):
-        """
-        Label encode genre target variable
-
-        Parameters
-        ----------
-        y : array-like
-            Genre labels
-
-        Returns
-        -------
-        np.ndarray
-            Encoded labels
-        """
-        return self.label_encoder.fit_transform(y)
-
-    def get_genre_names(self):
-        """Get list of genre names from encoder"""
-        return self.label_encoder.classes_
