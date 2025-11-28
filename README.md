@@ -249,3 +249,9 @@ I'm passionate about applying these research skills to real-world data science c
 
 --- -->
 
+---
+
+## References
+
+Project inspired by and uses code from:
+https://medium.com/@juanfraleonhardt/music-genre-classification-a-machine-learning-exercise-9c83108fd2bb
