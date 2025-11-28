@@ -75,18 +75,16 @@ song_genre_prediction/
 ├── notebooks/
 │ ├── 01_exploratory_analysis.ipynb # EDA and feature distributions
 │ ├── 02_clustering_analysis.ipynb # Unsupervised learning
-│ ├── 03_classification_models.ipynb # Supervised learning
+│ └── 03_classification_models.ipynb # Supervised learning
 ├── src/
 │ ├── data_loader.py # Data download and caching
 │ ├── preprocessing.py # Feature engineering pipeline
 │ ├── model_evaluation.py # Model evaluation utilities
 │ └── visualization.py # Plotting utilities
-│ └── test_preprocessing.py # Unit tests (pytest) -->
 ├── results/
 │ ├── figures/ # High-res plots for README
 │ ├── models/ # Saved model weights
 │ └── metrics/ # Performance JSON files
-├── setup.py -->
 └── README.md
 ```
 
