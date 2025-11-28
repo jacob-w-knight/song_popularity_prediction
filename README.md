@@ -178,11 +178,11 @@ model.train(X_train, y_train, X_test, y_test) -->
 
 ## Future Improvements
 
-- [ ] **Temporal analysis**: Track genre evolution over time (1950s→2020s)
-- [ ] **Lyric analysis**: Combine audio features with NLP on lyrics
-- [ ] **Interactive dashboard**: Deploy Streamlit app for real-time predictions
-- [ ] **Sub-genre classification**: Hierarchical classification (e.g., metal → death metal)
-- [ ] **Production tools**: Feature importance for aspiring producers
+<!-- - **Temporal analysis**: Track genre evolution over time (1950s→2020s) -->
+- **Lyric analysis**: Combine audio features with NLP on lyrics
+<!-- - **Interactive dashboard**: Deploy Streamlit app for real-time predictions -->
+- **Sub-genre classification**: Hierarchical classification (e.g., metal → death metal)
+<!-- - **Production tools**: Feature importance for aspiring producers -->
 
 ---
 
