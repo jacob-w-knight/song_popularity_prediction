@@ -212,21 +212,18 @@ model.train(X_train, y_train, X_test, y_test) -->
 
 **Jacob Knight** | Physics PhD → Data Science/ML Engineering
 
-I'm a physics researcher specializing in stochastic thermodynamics with 3+ years of Python experience. Through my PhD, I've developed expertise in:
+I'm a physics researcher specializing in stochastic thermodynamics with 5+ years of Python experience. Through my PhD, I've developed expertise in:
 - **Statistical modeling** and **Bayesian inference**
 - **Large-scale data analysis** and visualization
 - **Mathematical optimization** and algorithm development
-- **Scientific communication** to diverse audiences
+- **Scientific communication** to a variety of audiences
 
 I'm passionate about applying these research skills to real-world data science challenges. This project demonstrates my ability to:
 - Formulate data science problems from scratch
 - Build reproducible ML pipelines
 - Communicate technical findings effectively
-- Write production-quality code with tests
 
 **Seeking**: Data Science / ML Engineering roles where I can apply rigorous analytical thinking to business problems.
-
-**Connect**: [LinkedIn](#) | [Email](mailto:your.email@example.com) | [Portfolio](#)
 
 ---
 
