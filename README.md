@@ -85,6 +85,10 @@ song_genre_prediction/
 │ ├── figures/ # High-res plots for README
 │ ├── models/ # Saved model weights
 │ └── metrics/ # Performance JSON files
+├── data/
+│ ├── raw/ # Data from HuggingFace
+│ └── processed/ # Scaled data
+├── archive/ # Unused files
 └── README.md
 ```
 
