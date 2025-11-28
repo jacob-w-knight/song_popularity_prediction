@@ -100,7 +100,7 @@ song_genre_prediction/
 ![MDS Plot](results/figures/mds_plot.png)
 *Genres positioned by audio similarity using Multidimensional Scaling. Colors represent hierarchical clusters.*
 
-**Interpretation**: Electronic genres (top-left) cluster tightly, while rock genres (bottom) show high variance, indicating diverse sub-styles.
+**Interpretation**: Electronic genres (top-right) cluster tightly, while rock genres (middle-right) show high variance, indicating diverse sub-styles.
 
 ### Audio Feature Profiles
 ![Radar Charts](results/figures/radar_subplot.png)
