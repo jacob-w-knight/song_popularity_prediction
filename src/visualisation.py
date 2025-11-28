@@ -5,8 +5,13 @@ Visualization utilities for genre analysis
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+import pandas as pd
 from scipy.cluster.hierarchy import dendrogram
 from adjustText import adjust_text
+from sklearn.manifold import MDS
+from scipy.cluster.hierarchy import linkage, fcluster, dendrogram
+from scipy.spatial.distance import pdist, squareform
+import matplotlib.cm as cm
 
 
 def plot_dendrogram(linkage_matrix, labels, figsize=(18, 6)):
@@ -137,7 +142,7 @@ def plot_mds_clusters(
     plt.show()
 
 
-def create_radar_subplots(genre_data, figsize=(20, 14)):
+def create_radar_subplots(genre_data, figsize=(20, 14), save_path=None):
     """
     Create radar chart subplots for each genre
 
@@ -215,3 +220,131 @@ def create_radar_subplots(genre_data, figsize=(20, 14)):
     plt.tight_layout()
     plt.subplots_adjust(top=0.9)
     plt.show()
+    if save_path:
+        fig.savefig(save_path, dpi=300, bbox_inches="tight", facecolor="white")
+        print(f"Radar plot saved to {save_path}")
+    return
+
+
+def create_mds_plot(genre_data, n_clusters=5, save_path=None):
+    # Set seaborn style
+    sns.set_theme(style="whitegrid", palette="Set1")
+
+    # Perform clustering and MDS
+    distance_matrix = pdist(genre_data, metric="cosine")
+    distance_matrix_square = squareform(distance_matrix)
+
+    linkage_matrix = linkage(distance_matrix, method="ward")
+    cluster_labels = fcluster(linkage_matrix, n_clusters, criterion="maxclust")
+
+    mds = MDS(n_components=2, dissimilarity="precomputed", random_state=42)
+    mds_results = mds.fit_transform(distance_matrix_square)
+
+    # Manually name clusters
+    cluster_names = {
+        1: "Easy Listening",
+        2: "Classical Romantic",
+        3: "Popular",
+        4: "Comedy",
+        5: "Energetic Beats",
+        6: "Heavy Beats",
+    }
+
+    # Create DataFrame
+    plot_df = pd.DataFrame(
+        {
+            "MDS_1": mds_results[:, 0],
+            "MDS_2": mds_results[:, 1],
+            "Genre": [genre.title() for genre in genre_data.index],
+            "Cluster_Name": [
+                cluster_names.get(label, f"Cluster {label}") for label in cluster_labels
+            ],
+        }
+    )
+
+    # Create the plot
+    plt.figure(figsize=(14, 10))
+    plt.grid(visible=False)
+
+    ax = sns.scatterplot(
+        data=plot_df,
+        x="MDS_1",
+        y="MDS_2",
+        hue="Cluster_Name",
+        s=200,
+        alpha=0.8,
+        edgecolor="white",
+        linewidth=2,
+    )
+
+    # Create text annotations
+    texts = []
+    for i, row in plot_df.iterrows():
+        text = ax.text(
+            row["MDS_1"],
+            row["MDS_2"],
+            row["Genre"],
+            fontsize=8,
+            fontweight="bold",
+            ha="center",
+            va="center",
+            bbox=dict(
+                boxstyle="round,pad=0.3",
+                facecolor="white",
+                alpha=0.8,
+                edgecolor="gray",
+                linewidth=0.5,
+            ),
+        )
+        texts.append(text)
+
+    # Automatically adjust text positions to avoid overlap
+    adjust_text(
+        texts,
+        arrowprops=dict(arrowstyle="-", color="gray", alpha=0.6, lw=1),
+        expand_points=(1.2, 1.2),  # Expand around points
+        expand_text=(1.1, 1.1),  # Expand around text
+        force_points=0.5,  # Force away from points
+        force_text=1.2,  # Force away from other text
+        ax=ax,
+    )
+
+    # Enhance plot styling
+    ax.set_title("Music Genre Landscape", fontsize=16, fontweight="bold", pad=20)
+    ax.set_xlabel("MDS Component 1", fontsize=12, fontweight="semibold")
+    ax.set_ylabel("MDS Component 2", fontsize=12, fontweight="semibold")
+
+    # Legend
+    legend = ax.legend(
+        title="Genre Clusters",
+        bbox_to_anchor=(1.05, 0.65),
+        fontsize=12,
+        loc="upper left",
+        frameon=True,
+        fancybox=True,
+    )
+    legend.get_title().set_fontweight("bold")
+
+    # # Add stress information
+    # stress_text = f'MDS Stress: {mds.stress_:.3f}'
+    # ax.text(
+    #     0.02, 0.98, stress_text,
+    #     transform=ax.transAxes,
+    #     fontsize=10,
+    #     verticalalignment='top',
+    #     bbox=dict(
+    #         boxstyle="round,pad=0.5",
+    #         facecolor="lightblue",
+    #         alpha=0.8,
+    #         edgecolor='navy'
+    #     )
+    # )
+
+    plt.tight_layout()
+
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches="tight", facecolor="white")
+        print(f"Map saved to {save_path}")
+    plt.show()
+
+    return plot_df, mds.stress_
