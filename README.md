@@ -54,7 +54,7 @@ This project tackles two research questions:
 #### Unsupervised Analysis
 - **Hierarchical Clustering**: Ward linkage with cosine distance
 - **Dimensionality Reduction**: MDS for 2D visualization
-- **Validation**: Silhouette analysis, dendrogram inspection
+<!-- - **Validation**: Silhouette analysis, dendrogram inspection -->
 
 #### Supervised Classification
 - **Neural Network**: 5-layer architecture (256→128→64→32→output)
@@ -62,37 +62,33 @@ This project tackles two research questions:
 <!-- - **Evaluation**: Stratified 5-fold cross-validation -->
 
 ### Key Technologies
-pandas | numpy | scikit-learn | scipy | tensorflow | xgboost
-seaborn | matplotlib | plotly | adjustText | pytest
+pandas | numpy | scikit-learn | scipy | tensorflow | xgboost |
+seaborn | matplotlib | plotly | adjustText 
 
 
 ---
 
 ## Repository Structure
 
+```
 song_genre_prediction/
 ├── notebooks/
 │ ├── 01_exploratory_analysis.ipynb # EDA and feature distributions
 │ ├── 02_clustering_analysis.ipynb # Unsupervised learning
 │ ├── 03_classification_models.ipynb # Supervised learning
-<!-- │ └── 04_visualizations.ipynb # Publication-quality plots -->
 ├── src/
 │ ├── data_loader.py # Data download and caching
 │ ├── preprocessing.py # Feature engineering pipeline
-<!-- │ ├── clustering.py # Hierarchical clustering + MDS -->
-<!-- │ ├── models.py # ML model implementations -->
 │ ├── model_evaluation.py # Model evaluation utilities
 │ └── visualization.py # Plotting utilities
-<!-- ├── tests/
 │ └── test_preprocessing.py # Unit tests (pytest) -->
 ├── results/
 │ ├── figures/ # High-res plots for README
 │ ├── models/ # Saved model weights
 │ └── metrics/ # Performance JSON files
-<!-- ├── requirements.txt
 ├── setup.py -->
 └── README.md
-
+```
 
 ---
 
