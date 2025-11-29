@@ -10,6 +10,8 @@ from sklearn.metrics import (
     classification_report,
     confusion_matrix,
     top_k_accuracy_score,
+    silhouette_score,
+    silhouette_samples,
 )
 
 
@@ -324,3 +326,50 @@ def save_metrics_json(metrics_dict, filepath):
         json.dump(serializable_dict, f, indent=2)
 
     print(f"Metrics saved to {filepath}")
+
+
+def compute_silhouette_metrics(X, labels, metric="cosine", threshold=0.0):
+    """
+    Compute global and per-cluster silhouette-based metrics.
+
+    Parameters
+    ----------
+    X : array-like, shape (n_samples, n_features)
+        Feature matrix (or embedding).
+    labels : array-like, shape (n_samples,)
+        Cluster labels.
+    metric : str, optional
+        Distance metric (e.g. 'cosine', 'euclidean').
+    threshold : float, optional
+        Threshold for counting a sample as "coherent".
+
+    Returns
+    -------
+    sil_score : float
+        Mean silhouette score over all samples.
+    stats_df : pd.DataFrame
+        Per-cluster stats with columns: n_samples, mean_silhouette, coherence_pct.
+    overall_coherence : float
+        Fraction of samples with silhouette >= threshold.
+    """
+    import pandas as pd
+    import numpy as np
+
+    sil_score = silhouette_score(X, labels, metric=metric)
+    sil_samples = silhouette_samples(X, labels, metric=metric)
+
+    df = pd.DataFrame({"cluster": labels, "silhouette": sil_samples})
+
+    stats_df = (
+        df.groupby("cluster")
+        .agg(
+            n_samples=("silhouette", "count"),
+            mean_silhouette=("silhouette", "mean"),
+            coherence_pct=("silhouette", lambda s: (s >= threshold).mean() * 100.0),
+        )
+        .sort_index()
+    )
+
+    overall_coherence = (df["silhouette"] >= threshold).mean()
+
+    return sil_score, stats_df, overall_coherence

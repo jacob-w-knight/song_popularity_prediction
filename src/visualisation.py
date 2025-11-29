@@ -226,7 +226,7 @@ def create_radar_subplots(genre_data, figsize=(20, 14), save_path=None):
     return
 
 
-def create_mds_plot(genre_data, n_clusters=5, save_path=None):
+def create_mds_plot(genre_data, n_clusters=5, save_path=None, cluster_names_list=None):
     # Set seaborn style
     sns.set_theme(style="whitegrid", palette="Set1")
 
@@ -240,15 +240,18 @@ def create_mds_plot(genre_data, n_clusters=5, save_path=None):
     mds = MDS(n_components=2, dissimilarity="precomputed", random_state=42)
     mds_results = mds.fit_transform(distance_matrix_square)
 
-    # Manually name clusters
-    cluster_names = {
-        1: "Easy Listening",
-        2: "Classical Romantic",
-        3: "Popular",
-        4: "Comedy",
-        5: "Energetic Beats",
-        6: "Heavy Beats",
-    }
+    # Manually name clusters if names not provided
+    if cluster_names_list == None:
+        cluster_names = {
+            1: "Easy Listening",
+            2: "Classical Romantic",
+            3: "Popular",
+            4: "Comedy",
+            5: "Energetic Beats",
+            6: "Heavy Beats",
+        }
+    else:
+        cluster_names = cluster_names_list
 
     # Create DataFrame
     plot_df = pd.DataFrame(
@@ -347,4 +350,4 @@ def create_mds_plot(genre_data, n_clusters=5, save_path=None):
         print(f"Map saved to {save_path}")
     plt.show()
 
-    return plot_df, mds.stress_
+    return plot_df, mds.stress_, cluster_names
