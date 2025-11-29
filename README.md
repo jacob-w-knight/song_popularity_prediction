@@ -37,7 +37,7 @@ This project tackles two research questions:
 | Neural Network | 35.9% | 59.7% | 
 | XGBoost | 45.7% | 71.4% | 
 
-**Key Finding**: `energy`, `danceability`, and `acousticness` are the strongest genre discriminators, accounting for 62% of classification power.
+**Key Finding**: `popularity`, `explicit`, and `acousticness` are the strongest genre discriminators.
 
 ---
 
